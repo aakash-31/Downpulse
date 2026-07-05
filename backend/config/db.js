@@ -12,10 +12,10 @@ const connectDB = async () => {
       serverSelectionTimeoutMS: 4000,
     });
     isConnected = true;
-    console.log('✅ MongoDB connected successfully.');
+    console.log(' MongoDB connected successfully.');
   } catch (error) {
-    console.error('❌ MongoDB Connection Failed:', error.message);
-    console.log('⚠️  Activating IN-MEMORY DATABASE FALLBACK mode for demonstration.');
+    console.error(' MongoDB Connection Failed:', error.message);
+    console.log(' Activating IN-MEMORY DATABASE FALLBACK mode for demonstration.');
     process.env.USE_MEMORY_DB = 'true';
     isConnected = false;
   }

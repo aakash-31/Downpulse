@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
-const path = require('path');
 const { connectDB } = require('./config/db');
 const { initSocket } = require('./services/socket');
 const { seedDatabaseIfEmpty } = require('./services/storage');
@@ -27,11 +26,6 @@ app.use(express.json());
 // API Routes
 app.use('/api/monitors', monitorsRouter);
 
-// Serve static assets in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-}
-
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.json({
@@ -40,13 +34,6 @@ app.get('/health', (req, res) => {
     timestamp: new Date()
   });
 });
-
-// Serve frontend index.html for client side routing in production
-if (process.env.NODE_ENV === 'production') {
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'));
-  });
-}
 
 const PORT = process.env.PORT || 5000;
 
@@ -60,8 +47,8 @@ const startServer = async () => {
   
   server.listen(PORT, () => {
     console.log(`========================================`);
-    console.log(`🚀 DownPulse Server running on port ${PORT}`);
-    console.log(`🔌 WebSockets enabled and listening`);
+    console.log(`DownPulse Server running on port ${PORT}`);
+    console.log(` WebSockets enabled and listening`);
     console.log(`========================================`);
     
     // Start the Background Ping Engine
@@ -70,5 +57,5 @@ const startServer = async () => {
 };
 
 startServer().catch(err => {
-  console.error('🔥 Server boot failure:', err.message);
+  console.error('Server boot failure:', err.message);
 });

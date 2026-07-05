@@ -18,7 +18,7 @@ const startScheduler = async () => {
       }
     });
   } catch (error) {
-    console.error('❌ Ping Scheduler Initialization Failed:', error.message);
+    console.error('Ping Scheduler Initialization Failed:', error.message);
   }
 };
 
@@ -60,7 +60,7 @@ const syncMonitor = (monitor) => {
         }
       })
       .catch(err => {
-        console.error(`❌ Scheduler query error for ${monitor.name}:`, err.message);
+        console.error(` Scheduler query error for ${monitor.name}:`, err.message);
       });
   }, intervalMs);
   
